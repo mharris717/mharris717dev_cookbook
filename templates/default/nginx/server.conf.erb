@@ -1,0 +1,18 @@
+server {
+  server_name _; 
+  server_name_in_redirect off;
+
+  listen 80;
+
+  <% @sites.each do |site| %>
+
+  location /<%= site[:subdomain] %>/ {
+    proxy_pass http://unicorn_<%= site[:site] %>/;
+  }
+
+  <% end %>
+
+  location /basic/ {
+    proxy_pass http://sinatra/;
+  }
+}

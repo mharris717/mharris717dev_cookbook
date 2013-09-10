@@ -1,0 +1,21 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides: My Daemon
+# Required-Start: $network
+# Required-Stop: $network
+# Default-Start: 2 3 5
+# Description: My Daemon Desc
+### END INIT INFO
+
+case "$1" in
+'start')
+cd /var/sites/empty_site && unicorn_rails -C /etc/unicorn/default.rb
+;;
+'stop')
+/path/to/my/executable -stopcommand
+;;
+*)
+echo "Usage: $0 { start | stop }"
+;;
+esac
+exit 0

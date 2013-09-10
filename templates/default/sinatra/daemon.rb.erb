@@ -1,0 +1,8 @@
+require 'rubygems'
+require 'daemons'
+
+pwd = "/var/sites/basic_site"
+Daemons.run_proc('main.rb', {:dir_mode => :normal, :dir => "/opt/pids/sinatra"}) do
+  Dir.chdir(pwd)
+  exec "ruby main.rb -p 8080"
+end
