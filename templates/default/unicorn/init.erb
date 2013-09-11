@@ -7,7 +7,7 @@
 # description: Starts Sinatra as an unprivileged user.
 #
 
-cd <%= @site_dir %> && /usr/local/bin/bundle exec /usr/local/bin/unicorn_rails -D -c <%= @config_file %>
+cd <%= @site_dir %> && <%= node[:bundle_path] %> exec <%= node[:unicorn_path] %> -D -c <%= @config_file %>
 RETVAL=$?
 
 exit $RETVAL

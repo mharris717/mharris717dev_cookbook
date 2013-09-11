@@ -1,0 +1,10 @@
+#!/bin/bash
+
+<% @sites.each do |site| %>
+cd <%= site.site_dir %> && bundle install
+<% end %>
+
+<% @sites.each do |site| %>
+<%= site.init_file %>
+
+<% end %>

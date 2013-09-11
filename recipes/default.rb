@@ -27,14 +27,6 @@ git "#{node[:mharris717][:sites_dir]}/ember-auth-easy" do
   action :sync
 end
 
-git "#{node[:mharris717][:sites_dir]}/empty_site" do
-  repository "https://github.com/mharris717/empty_site.git"
-  action :sync
-end
 
-git "#{node[:mharris717][:sites_dir]}/empty_site2" do
-  repository "https://github.com/mharris717/empty_site.git"
-  action :sync
-end
 
 include_recipe 'mharris717::web_simple'

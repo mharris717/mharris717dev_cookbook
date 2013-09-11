@@ -21,4 +21,8 @@ node.default[:unicorn][:port] = '8081'
 node.set[:unicorn][:options] = { :tcp_nodelay => true, :backlog => 100 }
 end
 
+node.default[:bundle_path] = "/home/vagrant/.rbenv/shims/bundle"
+node.default[:unicorn_path] = "/home/vagrant/.rbenv/shims/unicorn_rails"
+node.default[:ruby_bin_path] = "/home/vagrant/.rbenv/shims"
+
 #node[:languages][:ruby][:default_version] = '1.9'
