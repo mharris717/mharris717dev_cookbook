@@ -8,15 +8,6 @@ hosted_site 'empty_site' do
   checkout "https://github.com/mharris717/empty_site.git"
 end
 
-hosted_site 'empty_site2' do
-  port 8082
-end
-
-hosted_site 'empty_site3' do
-  port 8083
-  checkout "https://github.com/mharris717/empty_site.git"
-end
-
 hosted_site 'ember-auth-easy_sample-rails-app' do
   port 8084
   checkout "https://github.com/mharris717/ember-auth-easy_sample-rails-app.git"
