@@ -1,6 +1,6 @@
 #!/bin/bash
 
-<% @sites.each do |site| %>
+<% @sites.select { |x| x.type == :unicorn }.each do |site| %>
 cd <%= site.site_dir %> && bundle install
 <% end %>
 
@@ -8,7 +8,6 @@ cd <%= site.site_dir %> && bundle install
 cd <%= site.site_dir %> && <%= site.setup_command %>
 <% end %>
 
-<% @sites.each do |site| %>
+<% @sites.select { |x| x.type == :unicorn }.each do |site| %>
 <%= site.init_file %>
-
 <% end %>

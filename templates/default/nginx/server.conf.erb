@@ -7,7 +7,11 @@ server {
   <% @sites.each do |site| %>
 
   location /<%= site[:subdomain] %>/ {
+    <% if site[:type] == :unicorn %>
     proxy_pass http://unicorn_<%= site[:site] %>/;
+    <% else %>
+    alias <%= site[:static_dir] %>/;
+    <% end %>
   }
 
   <% end %>

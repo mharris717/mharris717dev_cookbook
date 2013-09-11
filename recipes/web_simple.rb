@@ -15,6 +15,12 @@ hosted_site 'ember-auth-easy_sample-rails-app' do
   setup_command "rake db:migrate db:seed"
 end
 
+hosted_static_site "ember-auth-testapp" do
+  checkout "https://github.com/mharris717/ember-auth-testapp.git"
+  subdomain "eae"
+  #setup_command "npm install && grunt build:dist"
+end
+
 nginx_for_hosted_sites do
 
 end

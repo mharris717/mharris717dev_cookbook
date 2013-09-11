@@ -31,10 +31,17 @@ module MharrisDevCookbook
     def nginx_conf_file; @nginx_conf_file ||= "/etc/nginx/conf.d/#{site}.conf"; end
     attr_writer :site_dir, :config_file, :subdomain, :init_file, :nginx_config_file
 
-    attr_accessor :checkout, :enable, :setup_command
+    attr_accessor :checkout, :enable, :setup_command, :type
+    def type
+      @type ||= :unicorn
+    end
+
+    def static_dir
+      "#{site_dir}/dist"
+    end
 
     def vars
-      {:site => site, :site_dir => site_dir, :config_file => config_file, :subdomain => subdomain, :port => port}
+      {:site => site, :site_dir => site_dir, :config_file => config_file, :subdomain => subdomain, :port => port, :type => type, :static_dir => static_dir}
     end
 
     class << self
@@ -91,6 +98,20 @@ define :hosted_site, :enable => true do
       command "#{node[:bundle_path]} install"
     end
   end
+
+  if site.checkout
+    raise "bad checkout value #{site.checkout} for #{site.site}" unless site.checkout.kind_of?(String)
+    git site.site_dir do
+      repository site.checkout
+      action :sync
+    end
+  end
+end
+
+define :hosted_static_site, :enable => true do
+  MharrisDevCookbook::Site.sites_dir = node[:mharris717][:sites_dir]
+
+  site = MharrisDevCookbook::Site.make(params.merge(:type => :static))
 
   if site.checkout
     raise "bad checkout value #{site.checkout} for #{site.site}" unless site.checkout.kind_of?(String)
