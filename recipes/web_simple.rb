@@ -86,6 +86,11 @@ setup_site = lambda do |vars|
   service "unicorn_#{site}" do
     action [:enable]
   end
+
+  execute "bundle install #{site}" do
+    cwd vars[:site_dir]
+    command "/usr/local/bin/bundle install"
+  end
 end
 
 setup_site[{:site => "empty_site", :subdomain => "empty", :port => 8081}]
