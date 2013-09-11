@@ -5,8 +5,8 @@
 include_attribute "postgresql"
 
 #node[:rvm][:default_ruby] = "ruby-1.9.3-p448"
-node[:postgresql][:password] ||= {}
-node[:postgresql][:password][:postgres] = 'password123'
+node.normal[:postgresql][:password] ||= {}
+node.normal[:postgresql][:password][:postgres] = 'password123'
 
 default[:mharris717] = {}
 default[:mharris717][:sites_dir] = "/var/sites"
