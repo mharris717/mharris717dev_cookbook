@@ -1,55 +1,7 @@
 include_recipe "nginx"
-
-gem_package "sinatra" do
-  action :install
-end
-
-gem_package "daemons" do
-  action :install
-end
-
-directory "/opt/pids" do
-  mode "0755"
-  owner "www-data"
-end
-
-directory "/opt/pids/sinatra" do
-  mode "0755"
-  owner "www-data"
-end
-
-directory "/var/sites/basic_site" do
-  mode "0755"
-  owner "www-data"
-end
-
-template "/var/sites/basic_site/main.rb" do
-  source "sinatra/sinatra.rb.erb"
-  mode "0755"
-end
-
-template "/var/sites/basic_site/daemon.rb" do
-  source "sinatra/daemon.rb.erb"
-  mode "0755"
-end
-
-template "/etc/init.d/sinatra" do
-  source "sinatra/sinatra.init.erb"
-  mode "0700"
-  owner "root"
-  group "root"
-end
-
-template "/etc/nginx/conf.d/default.conf" do
-  source "sinatra/nginx.conf.erb"
-end
-
-service "sinatra" do
-  action [:enable,:start]
-end
+include_recipe "mharris717::sinatra"
 
 ##UNICORN
-
 hosted_site 'empty_site' do
   subdomain "empty"
   port 8081
@@ -65,6 +17,12 @@ hosted_site 'empty_site3' do
   checkout "https://github.com/mharris717/empty_site.git"
 end
 
+hosted_site 'ember-auth-easy_sample-rails-app' do
+  port 8084
+  checkout "https://github.com/mharris717/ember-auth-easy_sample-rails-app.git"
+  subdomain "eaerails"
+  setup_command "rake db:migrate db:seed"
+end
 
 nginx_for_hosted_sites do
 

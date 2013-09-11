@@ -3,4 +3,4 @@
 #end
 
 #gem_package "thin"
-#gem_package 'pg'
+gem_package 'pg'

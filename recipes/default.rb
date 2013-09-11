@@ -3,13 +3,10 @@ include_recipe "git"
 #include_recipe "rvm::system"
 #include_recipe "rvm::vagrant"
 #include_recipe "ruby1.9"
-#include_recipe 'postgresql::server'
+include_recipe 'postgresql::server'
 
-#include_recipe 'mharris717::gems'
+include_recipe 'mharris717::gems'
 #include_recipe "mharris717::node"
-
-
-
 
 directory node[:mharris717][:sites_dir] do
   owner "root"

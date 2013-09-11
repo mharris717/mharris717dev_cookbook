@@ -4,6 +4,10 @@
 cd <%= site.site_dir %> && bundle install
 <% end %>
 
+<% @sites.select { |x| x.setup_command }.each do |site| %>
+cd <%= site.site_dir %> && <%= site.setup_command %>
+<% end %>
+
 <% @sites.each do |site| %>
 <%= site.init_file %>
 

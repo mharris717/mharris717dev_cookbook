@@ -31,7 +31,7 @@ module MharrisDevCookbook
     def nginx_conf_file; @nginx_conf_file ||= "/etc/nginx/conf.d/#{site}.conf"; end
     attr_writer :site_dir, :config_file, :subdomain, :init_file, :nginx_config_file
 
-    attr_accessor :checkout, :enable
+    attr_accessor :checkout, :enable, :setup_command
 
     def vars
       {:site => site, :site_dir => site_dir, :config_file => config_file, :subdomain => subdomain, :port => port}
