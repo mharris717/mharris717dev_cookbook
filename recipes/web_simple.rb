@@ -19,6 +19,18 @@ hosted_static_site "ember-auth-testapp" do
   checkout "https://github.com/mharris717/ember-auth-testapp.git"
   subdomain "eae"
   #setup_command "npm install && grunt build:dist"
+  static_subdir "dist"
+end
+
+hosted_rack_site "ascension_ws" do
+  checkout "https://github.com/mharris717/ascension_ws.git"
+  port 8085
+end
+
+hosted_static_site "ascension_web" do
+  checkout "https://github.com/mharris717/ascension_web.git"
+  subdomain "ascension"
+  static_subdir "build"
 end
 
 nginx_for_hosted_sites do

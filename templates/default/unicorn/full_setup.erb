@@ -1,6 +1,6 @@
 #!/bin/bash
 
-<% @sites.select { |x| x.type == :unicorn }.each do |site| %>
+<% @sites.select { |x| x.bundle? }.each do |site| %>
 cd <%= site.site_dir %> && bundle install
 <% end %>
 
@@ -8,6 +8,9 @@ cd <%= site.site_dir %> && bundle install
 cd <%= site.site_dir %> && <%= site.setup_command %>
 <% end %>
 
-<% @sites.select { |x| x.type == :unicorn }.each do |site| %>
+<% @sites.select { |x| x.init? }.each do |site| %>
 <%= site.init_file %>
 <% end %>
+
+nginx -s stop
+nginx
