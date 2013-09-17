@@ -1,6 +1,12 @@
 include_recipe "nginx"
 include_recipe "mharris717::sinatra"
 
+directory node[:mharris717][:sites_dir] do
+  owner "root"
+  mode "0755"
+  action :create
+end
+
 ##UNICORN
 hosted_site 'empty_site' do
   subdomain "empty"

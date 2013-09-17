@@ -97,6 +97,14 @@ mit 'ascension cards' do
   curl("ascension_ws/cards").should =~ /\{"cards"/
 end
 
+mit 'mongo test' do
+  source = File.dirname(__FILE__) + "/mongo_test.js"
+  with_vm_file(source) do |target|
+    res = ec_guest("mongo localhost/specdb #{target}")
+    res.strip.split("\n")[2..-1].should == %w(0 3 2)
+  end
+end
+
 
 describe "basic tests" do
   before(:all) do
@@ -148,6 +156,19 @@ describe "basic tests" do
     url = "http://localhost:5150/#{url}"
     require 'open-uri'
     open(url).read
+  end
+
+  def with_vm_file(source,&b)
+    ext = source.split(".").last
+    body = File.read(source)
+    scratch = File.expand_path(File.dirname(__FILE__) + "/../../local/scratch")
+    target_base = "#{rand(100000000000)}.#{ext}"
+    target = "#{scratch}/#{target_base}"
+    vm_target = "/vagrant/scratch/#{target_base}"
+    File.create target, body
+    yield(vm_target)
+  ensure 
+    FileUtils.rm target
   end
 
   Tests.run! :all, self  
