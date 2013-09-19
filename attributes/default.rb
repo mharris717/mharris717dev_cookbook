@@ -10,6 +10,9 @@ node.normal[:postgresql][:password][:postgres] = 'password123'
 
 default[:mharris717] = {}
 default[:mharris717][:sites_dir] = "/var/sites"
+default[:mharris717][:site_libs_dir] = "/var/site_libs"
+default[:mharris717][:pids_dir] = "/tmp/pids"
+default[:mharris717][:server_name] = "_"
 
 #node[:npm][:version] = "1.3.4"
 

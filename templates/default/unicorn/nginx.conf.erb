@@ -1,3 +1,41 @@
 upstream unicorn_<%= @site %> {
   server 127.0.0.1:<%= @port %>;
 }
+
+server {
+  server_name <%= @subdomain %>.mharrisdev.com; 
+  server_name_in_redirect off;
+
+  listen 80;
+
+  location / {
+    <% if @type == :rails || @type == :rack %>
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_redirect off;
+    proxy_pass http://unicorn_<%= @site %>/;
+    <% elsif @type == :static %>
+    alias /;
+    index index.html;
+    <% end %>
+  }
+}
+
+server {
+  server_name <%= @subdomain %>.mharrisdevl.com; 
+  server_name_in_redirect off;
+
+  listen 80;
+
+  location / {
+    <% if @type == :rails || @type == :rack %>
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_redirect off;
+    proxy_pass http://unicorn_<%= @site %>/;
+    <% elsif @type == :static %>
+    alias /;
+    index index.html;
+    <% end %>
+  }
+}

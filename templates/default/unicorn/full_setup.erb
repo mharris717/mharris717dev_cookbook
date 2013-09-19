@@ -1,7 +1,7 @@
 #!/bin/bash
 
 <% @sites.select { |x| x.bundle? }.each do |site| %>
-cd <%= site.site_dir %> && bundle install
+cd <%= site.init_dir %> && bundle install
 <% end %>
 
 <% @sites.select { |x| x.setup_command }.each do |site| %>
@@ -9,7 +9,7 @@ cd <%= site.site_dir %> && <%= site.setup_command %>
 <% end %>
 
 <% @sites.select { |x| x.init? }.each do |site| %>
-<%= site.init_file %>
+<%= site.init_file %> restart
 <% end %>
 
 nginx -s stop

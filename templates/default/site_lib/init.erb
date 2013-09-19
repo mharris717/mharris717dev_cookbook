@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# Written by Patrick McKenzie, 2010.
+# I release this work unto the public domain.
+#
+# sinatra      Startup script for Sinatra server.
+# description: Starts Sinatra as an unprivileged user.
+#
+
+cd <%= @init_dir %> && <%= node[:bundle_path] %> exec <%= @init_command %>
+RETVAL=$?
+
+exit $RETVAL

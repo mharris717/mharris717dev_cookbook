@@ -7,6 +7,18 @@ directory node[:mharris717][:sites_dir] do
   action :create
 end
 
+directory node[:mharris717][:site_libs_dir] do
+  owner "root"
+  mode "0755"
+  action :create
+end
+
+directory node[:mharris717][:pids_dir] do
+  owner "root"
+  mode "0755"
+  action :create
+end
+
 ##UNICORN
 hosted_site 'empty_site' do
   subdomain "empty"
@@ -39,9 +51,7 @@ hosted_static_site "ascension_web" do
   static_subdir "build"
 end
 
-nginx_for_hosted_sites do
 
-end
 
 #sudo rm /etc/init.d/unicorn_empty_site /etc/nginx/conf.d/empty_site.conf /etc/unicorn/empty_site.rb
 # sudo /etc/init.d/unicorn_empty_site start && sudo /etc/init.d/unicorn_empty_site2 start

@@ -1,5 +1,5 @@
 server {
-  server_name _; 
+  server_name <%= @server_name %>; 
   server_name_in_redirect off;
 
   listen 80;
@@ -12,7 +12,7 @@ server {
     proxy_set_header Host $http_host;
     proxy_redirect off;
     proxy_pass http://unicorn_<%= site[:site] %>/;
-    <% else %>
+    <% elsif site[:type] == :static %>
     alias <%= site[:static_dir] %>/;
     index index.html;
     <% end %>
