@@ -230,6 +230,7 @@ define :site_lib, :enable => true do
     git site.site_dir do
       repository site.checkout
       action :sync
+      branch :master
     end
   end
 end
