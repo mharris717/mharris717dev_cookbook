@@ -51,6 +51,10 @@ hosted_static_site "ascension_web" do
   static_subdir "build"
 end
 
+hosted_rack_site "scores" do
+  checkout "https://github.com/mharris717/espn_scores.git"
+  port 8087
+end
 
 
 #sudo rm /etc/init.d/unicorn_empty_site /etc/nginx/conf.d/empty_site.conf /etc/unicorn/empty_site.rb
