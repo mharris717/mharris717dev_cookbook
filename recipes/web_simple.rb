@@ -56,6 +56,11 @@ hosted_rack_site "scores" do
   port 8087
 end
 
+hosted_rack_site "tpb" do
+  checkout "https://github.com/mharris717/tpb_wrap.git"
+  port 8088
+end
+
 
 #sudo rm /etc/init.d/unicorn_empty_site /etc/nginx/conf.d/empty_site.conf /etc/unicorn/empty_site.rb
 # sudo /etc/init.d/unicorn_empty_site start && sudo /etc/init.d/unicorn_empty_site2 start
