@@ -194,6 +194,7 @@ define :hosted_rack_site, :enable => true do
     preload_app node[:unicorn][:preload_app]
     worker_processes node[:unicorn][:worker_processes]
     before_fork node[:unicorn][:before_fork]
+    pid site.pid_file
   end
 
   service "unicorn_#{site.site}" do
