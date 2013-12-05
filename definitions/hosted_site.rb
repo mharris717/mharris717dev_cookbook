@@ -63,7 +63,9 @@ module MharrisDevCookbook
     end
 
     def static_dir
-      "#{site_dir}/#{static_subdir}"
+      s = static_subdir
+      s = "/#{s}" if s.present?
+      "#{site_dir}#{s}"
     end
 
     def unicorn_path
