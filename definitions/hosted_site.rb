@@ -64,7 +64,7 @@ module MharrisDevCookbook
 
     def static_dir
       s = static_subdir
-      s = "/#{s}" if s.present?
+      s = "/#{s}" if s.to_s.strip != ""
       "#{site_dir}#{s}"
     end
 
